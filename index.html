@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Sistem Inventory Barang - Kirito</title>
+    <link rel="stylesheet" href="2styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div id="login-page" class="page active content-section">
+        <div class="login-container">
+            <h1>HEAVY AND SOLID</h1>
+            <div class="form-card">
+                <form id="login-form">
+                    <div class="input-group">
+                        <input type="text" id="username" placeholder="Username" required>
+                    </div>
+                    <div class="input-group">
+                        <input type="password" id="password" placeholder="Password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Get Started</button>
+                    <p class="help-text">Need Help?</p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="main-content" class="page hidden">
+
+        <header class="main-header">
+            <h2>KIRITO</h2>
+            <button id="menu-toggle" class="menu-btn">☰</button>
+        </header>
+
+        <div id="dashboard-page" class="content-section active">
+            <div class="dashboard-header">
+                <h2>Dashboard</h2>
+                <p>Overview data inventaris secara realtime.</p>
+            </div>
+
+            <div class="dashboard-stats">
+                <div class="stat-box green">
+                    <h3>Total Barang</h3>
+                    <p id="dash-total-barang" class="stat-value">0</p>
+                    <small>Realtime Count</small>
+                </div>
+                <div class="stat-box blue">
+                    <h3>Total Supplier</h3>
+                    <p id="dash-total-supplier" class="stat-value">0</p>
+                    <small>Realtime Count</small>
+                </div>
+                <div class="stat-box brown">
+                    <h3>Stok Rendah</h3>
+                    <p id="dash-stok-rendah" class="stat-value">0</p>
+                    <small>Stock < 5</small>
+                </div>
+                <div class="stat-box summary">
+                    <p>TOTAL ITEM</p>
+                    <h3 id="dash-total-item" class="stat-value">0</h3>
+                </div>
+                <div class="stat-box summary">
+                    <p>SUPPLIER AKTIF</p>
+                    <h3 id="dash-supplier-aktif" class="stat-value">0</h3>
+                </div>
+            </div>
+
+            <div class="dashboard-visuals">
+                <div class="chart-panel">
+                    <h3>GRAFIK</h3>
+                    <div class="chart-placeholder"></div>
+                </div>
+                <div class="warehouse-panel">
+                    <h3>KIRITO</h3>
+                    <p>Status gudang dan statistik barang.</p>
+                    <div class="warehouse-image"></div>
+                </div>
+            </div>
+
+            <div class="dashboard-footer">
+                <div class="footer-box blue">
+                    <h3 id="dash-barang-terbanyak" class="stat-value">-</h3>
+                    <p>Barang Terbanyak</p>
+                </div>
+                <div class="footer-box blue">
+                    <h3 id="dash-barang-tersedikit" class="stat-value">-</h3>
+                    <p>Barang Tersedikit</p>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="supplier-page" class="content-section hidden">
+            <div class="page-header">
+                <h2>TOTAL SUPPLIER</h2>
+                <button id="tambah-supplier-btn" class="btn btn-add">TAMBAH SUPPLIER ➕</button>
+            </div>
+
+            <div class="data-table-container supplier-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>NAMA</th>
+                            <th>CONTACT</th>
+                            <th>ALAMAT</th>
+                            <th>AKSI</th>
+                        </tr>
+                    </thead>
+                    <tbody id="supplier-body">
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="add-supplier-form" class="input-form-modal hidden">
+                <div class="form-card-supplier">
+                    <h3>INPUT SUPPLIER</h3>
+                    <form id="form-supplier-add">
+                        <div class="form-row">
+                            <label for="supplier-nama">NAMA</label>
+                            <input type="text" id="supplier-nama" name="nama" placeholder="Masukkan" required>
+                        </div>
+                        <div class="form-row">
+                            <label for="supplier-contact">CONTACT</label>
+                            <input type="text" id="supplier-contact" name="contact" placeholder="Masukkan" required>
+                        </div>
+                        <div class="form-row">
+                            <label for="supplier-alamat">ALAMAT</label>
+                            <input type="text" id="supplier-alamat" name="alamat" placeholder="Masukkan" required>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-secondary" onclick="hideSupplierForm()">Batal</button>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div id="barang-page" class="content-section hidden">
+            <div class="page-header">
+                <h2>JUMLAH BARANG</h2>
+                <button id="tambah-barang-btn" class="btn btn-add green-add">TAMBAH BARANG ➕</button>
+            </div>
+
+            <div class="data-table-container barang-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>CODE</th>
+                            <th>BARANG</th>
+                            <th>SUPPLIER</th>
+                            <th>JUMLAH</th>
+                            <th>AKSI</th>
+                        </tr>
+                    </thead>
+                    <tbody id="barang-body">
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="add-barang-form" class="input-form-modal hidden">
+                <div class="form-card-barang">
+                    <h3>INPUT BARANG</h3>
+                    <form id="form-barang-add">
+                        <div class="form-row">
+                            <label for="barang-code">CODE</label>
+                            <input type="text" id="barang-code" name="code" placeholder="Otomatis" disabled>
+                        </div>
+
+                        <div class="form-row">
+                            <label for="barang-nama">BARANG</label>
+                            <input type="text" id="barang-nama" name="nama" placeholder="Masukkan" required>
+                        </div>
+
+                        <div class="form-row">
+                            <label for="barang-supplier">SUPPLIER</label>
+                            <select id="barang-supplier" name="supplier_id" required>
+                                <option value="">-- Pilih Supplier --</option>
+                            </select>
+                        </div>
+
+                        <div class="form-row">
+                            <label for="barang-jumlah">JUMLAH</label>
+                            <input type="number" id="barang-jumlah" name="jumlah" placeholder="Masukkan" required min="1">
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-secondary green-secondary" onclick="hideBarangForm()">Batal</button>
+                            <button type="submit" class="btn btn-primary green-primary">Simpan</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div id="stok-page" class="content-section hidden">
+            <h2>STOK BARANG</h2>
+            <div class="stok-change-container">
+                <div class="select-barang-dropdown">
+                    <h3>PILIH BARANG</h3>
+                    <select id="select-barang-stok">
+                        <option value="">-- Pilih Barang --</option>
+                    </select>
+                </div>
+
+                <div id="stok-detail-table" class="data-table-container green-table hidden"></div>
+
+                <div class="input-stok-form-container">
+                    <form id="form-stok-change">
+                        <div class="form-row">
+                            <label for="stok-bertambah">BERTAMBAH</label>
+                            <input type="number" id="stok-bertambah" name="bertambah" placeholder="Masukkan" min="0">
+                        </div>
+                        <div class="form-row">
+                            <label for="stok-berkurang">BERKURANG</label>
+                            <input type="number" id="stok-berkurang" name="berkurang" placeholder="Masukkan" min="0">
+                        </div>
+                        <div class="form-row">
+                            <label for="stok-jumlah-akhir">JUMLAH (Total Saat Ini)</label>
+                            <input type="text" id="stok-jumlah-akhir" name="jumlah-akhir" placeholder="Jumlah" disabled>
+                        </div>
+                        <div class="form-row">
+                            <label for="stok-keterangan">KETERANGAN</label>
+                            <input type="text" id="stok-keterangan" name="keterangan" placeholder="Masukkan">
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" class="btn btn-secondary brown-secondary" onclick="resetStokForm()">Batal</button>
+                            <button type="submit" class="btn btn-primary brown-primary">Simpan Perubahan</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <nav id="sidebar" class="hidden">
+        <ul>
+            <li><a href="#" data-page="dashboard-page">Dashboard</a></li>
+            <li><a href="#" data-page="supplier-page">Total Supplier</a></li>
+            <li><a href="#" data-page="barang-page">Jumlah Barang</a></li>
+            <li><a href="#" data-page="stok-page">Stok Barang (Manajemen)</a></li>
+            <li><a href="#" data-page="login-page">Logout</a></li>
+        </ul>
+    </nav>
+
+    <script src="scripts.js"></script>
+</body>
+</html>

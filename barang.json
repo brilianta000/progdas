@@ -1,0 +1,23 @@
+[
+    {
+        "id": 2,
+        "kode": 2,
+        "nama": "Daimen Epep",
+        "jumlah": 1000,
+        "supplier_id": 1765465131
+    },
+    {
+        "id": 3,
+        "kode": 3,
+        "nama": "Daimen Epep",
+        "jumlah": 100,
+        "supplier_id": 1765465131
+    },
+    {
+        "id": 4,
+        "kode": 4,
+        "nama": "Daimen Epep",
+        "jumlah": 20,
+        "supplier_id": 1765465131
+    }
+]
